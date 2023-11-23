@@ -1,0 +1,116 @@
+1. Buat project vite baru 9-fe-book-store
+2. pindah directory kemudian pnpm install
+3. install library
+    a. pnpm install react-router-dom
+    b. pnpm install axios
+    c. pnpm install bulma
+    d. pnpm add --save-dev sass
+
+4. hapus app.css dan index.css
+5. hapus './index.css' di file main.jsx
+8. Buat code app.jsx seperti ini
+    function App() {
+    return (
+    );
+    }
+
+    export default App;
+
+8. Buat kode di main.jsx 
+    import React from "react";
+    import ReactDOM from "react-dom/client";
+    import App from "./App.jsx";
+    import "bulma";
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+    );
+
+9. Buat folder components pada folder src, dan buat sebuah file BookList.jsx
+import React, { useState, useEffect } from "react";
+
+const BookList = () => {
+  const [books, setBook] = useState([]);
+
+  return (
+    <div className="columns mt-5 is-centered">
+      <div className="column is-half">
+        <table className="table is-striped is-fullwidth">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Judul</th>
+              <th>Penerbit</th>
+              <th>Deskripsi</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default BookList;
+
+10. App.jsx seperti ini
+    function App() {
+    return (
+            <div>
+            <BookList />
+            </div>
+        );
+    }
+
+    export default App;
+
+11. import axios
+    import axios from "axios";
+
+12. buat fungsi untuk melihat response data
+    useEffect(() => {
+        getBooks();
+    }, []);
+
+    const getBooks = async () => {
+        const response = await axios.get("http://192.168.40.1:3333/books");
+        console.log(response.data);
+    };
+
+13. ganti console.log
+   setBook(response.data.data);
+
+14. masukan data pada looping
+            {books.map((book, index) => (
+              <tr key={book.id}>
+                <td>{index + 1}</td>
+                <td>{book.judul}</td>
+                <td>{book.penerbit}</td>
+                <td>{book.deskripsi}</td>
+                <td>
+                  <button className="button is-small is-info">Edit</button>
+                  <button className="button is-small is-danger">Delete</button>
+                </td>
+              </tr>
+            ))}
+
+15. Buat komponen baru, dengan nama addBook.jsx (rafce)
+16. Buat kode .columns>.column
+    const AddBook = () => {
+      return (
+        <div className="columns mt-5 is-centered">
+          <div className="column is half"></div>
+        </div>
+      );
+    };
